@@ -1,0 +1,80 @@
+section.tabs > article .contenu {
+	.tabs-wrapper {
+		position: relative;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto auto auto;
+		gap: 0px;
+		grid-template-areas:
+			'headline tab-links'
+			'advizor .'
+			'. description';
+
+		> * {
+			align-self: start;
+		}
+
+		.headline {
+			grid-area: headline;
+		}
+
+		.tab-links {
+			grid-area: tab-links;
+			display: flex;
+			list-style: none;
+			background-color: #fff;
+			border-radius: 3em;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			width: fit-content;
+			justify-self: end;
+			margin-right: 1em;
+			margin-top: 1em;
+			margin-bottom: 0;
+
+			> * {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0.7em 0.8em;
+				line-height: 1;
+				cursor: pointer;
+			}
+		}
+
+		.advizor {
+			grid-area: advizor;
+			background: #fff;
+			padding: 1em;
+			max-width: 280px;
+			border-radius: 1em;
+			margin-left: 8px;
+			display: flex;
+			flex-direction: column;
+			gap: 1em;
+
+			> img {
+				max-width: 170px;
+			}
+		}
+
+		.description {
+			grid-area: description;
+			background: #fff;
+			padding: 1em;
+			border-radius: 1em;
+			margin-right: 1em;
+			margin-bottom: 1em;
+			display: flex;
+			flex-direction: column;
+			gap: 1em;
+		}
+
+		.poster {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			z-index: -1;
+		}
+	}
+}

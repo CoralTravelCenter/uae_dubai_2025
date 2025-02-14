@@ -1,0 +1,43 @@
+section.info-cards > article .contenu {
+	.info-cards-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 2em;
+
+		.card {
+			--gap: 1em;
+			display: flex;
+			gap: var(--gap);
+
+			.text {
+				background: #fff;
+				border-radius: 1em;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				gap: 1em;
+				padding: 2em;
+			}
+
+			.visual {
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.13);
+				border-radius: 1em;
+				overflow: hidden;
+			}
+		}
+
+		._40_60 {
+			.text {
+				width: calc(45% - (var(--gap) / 2));
+			}
+
+			.visual {
+				width: calc(55% - (var(--gap) / 2));
+			}
+		}
+
+		._40_60.reversed {
+			flex-direction: row-reverse;
+		}
+	}
+}

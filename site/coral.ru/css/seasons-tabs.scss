@@ -1,0 +1,165 @@
+@import '../../common/css/coral/_coral-fluid-mixins.scss';
+
+section.seasons-tabs > article .contenu {
+	.description {
+		@include property(margin-top, 28px);
+	}
+
+	ul.navigation {
+		user-select: none;
+		display: flex;
+		list-style: none;
+		width: 60%;
+		margin: -1.2em auto 0;
+		z-index: 2;
+		position: relative;
+		@include property(border-radius, 57px);
+		background: #fff;
+		box-shadow: 0px 37px 40px 0px rgba(0, 0, 0, 0.05);
+		padding: 2px;
+
+		li {
+			flex: 1;
+			display: flex;
+			padding: 10px 26px;
+			justify-content: center;
+			align-items: center;
+			@include property(border-radius, 30px);
+		}
+
+		li.js-active {
+			background: var(--colorPrimaryBase, #0092d0);
+			color: #fff;
+		}
+	}
+
+	.content {
+		display: none;
+	}
+
+	.content.js-active {
+		display: block;
+	}
+
+	.poster {
+		border-radius: 1em;
+		overflow: hidden;
+
+		> img {
+			display: block;
+		}
+	}
+
+	.calendare-wrapper {
+		user-select: none;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		@include property(gap, 62px);
+		@include property(margin-top, 60px);
+
+		.month {
+			display: flex;
+			flex-direction: column;
+			@include property(padding-block, 37px);
+			@include property(padding-inline, 11px);
+			@include property(border-radius, 20px);
+			background: linear-gradient(109deg, #dee8f9 -28.44%, #f8fbff 122.57%),
+				#d9d9d9;
+			box-shadow: 20px 19px 20px 6px rgba(209, 224, 250, 0.669);
+
+			.calendar-header {
+				@include fontAndProperty(20px, margin-bottom, 30px);
+				font-weight: 600;
+				@include property(padding-inline, 12px);
+			}
+
+			.days-of-week {
+				display: grid;
+				grid-template-columns: repeat(7, 1fr);
+				@include property(gap, 12px);
+				margin-bottom: 20px;
+
+				> div {
+					align-self: center;
+					justify-self: center;
+					max-width: 24px;
+				}
+			}
+
+			.calendar {
+				display: grid;
+				grid-template-columns: repeat(7, 1fr);
+				@include property(gap, 12px);
+				justify-items: center;
+
+				.day {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					@include property(width, 30px);
+					@include property(height, 30px);
+					padding: 9px 3px;
+				}
+
+				.day[data-holyday] {
+					border-radius: 8px;
+					background: #9ebcf8;
+					color: #fff;
+					cursor: pointer;
+
+					&:hover {
+						background: #dce7fb;
+					}
+				}
+
+				.day.disabled {
+					opacity: 0.2;
+				}
+			}
+		}
+	}
+
+	/* Основной контейнер тултипа */
+	.tippy-box {
+		background-color: #fff;
+		color: #000;
+		border-radius: 6px;
+		padding: 0;
+		background: var(--colorBgElevated, #fff);
+		font-size: 14px;
+		text-align: center;
+
+		.tippy-content {
+			padding: 0;
+		}
+
+		.content {
+			display: flex;
+			flex-direction: column;
+			align-items: start;
+			gap: 8px;
+			padding: 12px 16px;
+		}
+
+		.name,
+		.description {
+			font-size: 14px;
+			font-weight: 700;
+			line-height: 1.5;
+			text-align: left;
+			margin: 0;
+		}
+
+		.description {
+			font-weight: 400;
+		}
+
+		.actions a {
+			padding: 5px 12px;
+		}
+	}
+
+	.tippy-arrow {
+		color: #fff;
+	}
+}

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "tippy.js": "^6.3.7"
+  }
+}

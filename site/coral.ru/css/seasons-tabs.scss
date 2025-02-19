@@ -25,6 +25,8 @@ section.seasons-tabs > article .contenu {
 			justify-content: center;
 			align-items: center;
 			@include property(border-radius, 30px);
+			cursor: pointer;
+			transition: all 300ms ease;
 		}
 
 		li.js-active {
@@ -50,72 +52,67 @@ section.seasons-tabs > article .contenu {
 		}
 	}
 
-	.calendare-wrapper {
-		user-select: none;
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		@include property(gap, 62px);
-		@include property(margin-top, 60px);
+	.calendar-container {
+		--background-color: #fff;
+		--calendar-bg: white;
+		--text-color: black;
+		--shadow-color: rgba(0, 0, 0, 0.1);
+		--holiday-bg: #0092d0;
+		--weekend-color: #e67e22;
+
+		@include property(margin-top, 40px);
+		display: flex;
+		justify-content: space-evenly;
+
+		.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			@include property(margin-bottom, 24px);
+		}
+
+		.calendar {
+			background: var(--calendar-bg);
+			@include property(padding, 24px);
+			@include property(border-radius, 20px);
+			box-shadow: 0 4px 8px var(--shadow-color);
+			text-align: center;
+		}
 
 		.month {
-			display: flex;
-			flex-direction: column;
-			@include property(padding-block, 37px);
-			@include property(padding-inline, 11px);
-			@include property(border-radius, 20px);
-			background: linear-gradient(109deg, #dee8f9 -28.44%, #f8fbff 122.57%),
-				#d9d9d9;
-			box-shadow: 20px 19px 20px 6px rgba(209, 224, 250, 0.669);
-
-			.calendar-header {
-				@include fontAndProperty(20px, margin-bottom, 30px);
-				font-weight: 600;
-				@include property(padding-inline, 12px);
-			}
-
-			.days-of-week {
-				display: grid;
-				grid-template-columns: repeat(7, 1fr);
-				@include property(gap, 12px);
-				margin-bottom: 20px;
-
-				> div {
-					align-self: center;
-					justify-self: center;
-					max-width: 24px;
-				}
-			}
-
-			.calendar {
-				display: grid;
-				grid-template-columns: repeat(7, 1fr);
-				@include property(gap, 12px);
-				justify-items: center;
-
-				.day {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					@include property(width, 30px);
-					@include property(height, 30px);
-					padding: 9px 3px;
-				}
-
-				.day[data-holyday] {
-					border-radius: 8px;
-					background: #9ebcf8;
-					color: #fff;
-					cursor: pointer;
-
-					&:hover {
-						background: #dce7fb;
-					}
-				}
-
-				.day.disabled {
-					opacity: 0.2;
-				}
-			}
+			font-size: 20px;
+			font-weight: bold;
+		}
+		.work-days {
+			font-size: 14px;
+			color: var(--text-color);
+		}
+		.weekdays,
+		.days {
+			display: grid;
+			grid-template-columns: repeat(7, 1fr);
+		}
+		.weekdays div {
+			font-weight: bold;
+			@include property(margin-bottom, 16px);
+		}
+		.days div {
+			padding: 5px 10px;
+		}
+		.days div.curved-right {
+			border-top-right-radius: 12px;
+			border-bottom-right-radius: 12px;
+		}
+		.days div.curved-left {
+			border-top-left-radius: 12px;
+			border-bottom-left-radius: 12px;
+		}
+		.days .weekend {
+			color: var(--weekend-color);
+		}
+		.days .holiday {
+			background: var(--holiday-bg);
+			color: white;
 		}
 	}
 

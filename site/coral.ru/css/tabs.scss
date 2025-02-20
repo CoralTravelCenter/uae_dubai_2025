@@ -8,7 +8,6 @@ section.tabs > article .contenu {
 		grid-template-rows: auto auto auto;
 		gap: 0px;
 		aspect-ratio: 684/265;
-		position: relative;
 		z-index: 2;
 		grid-template-areas:
 			'headline tab-links'
@@ -42,6 +41,7 @@ section.tabs > article .contenu {
 			position: relative;
 			margin: 0;
 			z-index: 2;
+			padding: 2px;
 
 			> * {
 				display: flex;
@@ -53,9 +53,16 @@ section.tabs > article .contenu {
 				font-size: 0.9em;
 			}
 		}
+		
+		.tab-link {
+			transition: all 300ms ease;
+		}
 
 		.tab-link.js-active {
-			background: tab-link;
+			background: #EAF3FB;
+			color: #000;
+			font-weight: 600;
+			border-radius: 3em;
 		}
 
 		.advizor {
@@ -67,15 +74,19 @@ section.tabs > article .contenu {
 			display: flex;
 			flex-direction: column;
 			gap: 0.8em;
-			top: 8px;
 			margin-left: 8px;
-			position: relative;
-			font-size: 0.85em;
+			position: absolute;
+    	top: -82%;
+			font-size: 1em;
 			z-index: 2;
 
 			> img {
 				max-width: 170px;
 			}
+		}
+		
+		.advizor.js-hidden {
+			display: none;
 		}
 
 		.description {
@@ -83,14 +94,23 @@ section.tabs > article .contenu {
 			background: #fff;
 			padding: 1em;
 			border-radius: 1em;
-			bottom: 16px;
+			bottom: 36px;
 			right: 16px;
-			position: relative;
-			display: flex;
+			position: absolute;
+			display: none;
 			flex-direction: column;
 			gap: 0.8em;
-			font-size: 0.85em;
+			font-size: 1em;
 			z-index: 2;
+			
+			ul {
+				margin: 0;
+				padding-left: 2em;
+			}
+		}
+		
+		.description.js-active {
+			display: flex;
 		}
 
 		.poster {
@@ -102,6 +122,14 @@ section.tabs > article .contenu {
 			z-index: 1;
 			overflow: hidden;
 			border-radius: 1.5em;
+			
+			img {
+				display: none;
+			}
+			
+			img.js-active {
+				display: block;
+			}
 		}
 	}
 }

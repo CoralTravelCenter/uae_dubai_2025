@@ -1,7 +1,7 @@
-import { getSeason } from 'season-detect'
 import tippy from 'tippy.js'
 import 'tippy.js/dist/tippy.css'
-import { hostReactAppReady } from '../../common/js/utils'
+import {hostReactAppReady} from '../../common/js/utils'
+import dayjs from "dayjs";
 
 window._calendar_actions = [
 	{
@@ -20,6 +20,27 @@ window._calendar_actions = [
 		],
 	},
 ]
+
+
+function getSeason() {
+	const currentMonth = dayjs().month();
+	const seasons = {
+		0: "Зима",
+		1: "Зима",
+		2: "Весна",
+		3: "Весна",
+		4: "Весна",
+		5: "Лето",
+		6: "Лето",
+		7: "Лето",
+		8: "Осень",
+		9: "Осень",
+		10: "Осень",
+		11: "Зима"
+	};
+	return seasons[currentMonth];
+}
+
 
 function highlightRange(container, startValue, endValue, holidayName) {
 	if (!container) return

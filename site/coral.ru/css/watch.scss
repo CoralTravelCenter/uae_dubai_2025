@@ -3,11 +3,26 @@ section.info-cards > article .contenu {
 		display: flex;
 		flex-direction: column;
 		gap: 2em;
+		position: relative;
+		
+		@media (max-width: 768px) {
+			flex-direction: row;
+			overflow-x: scroll;
+			scroll-snap-type: x mandatory;
+			align-items: start;
+		}
 
 		.card {
 			--gap: 1em;
 			display: flex;
 			gap: var(--gap);
+			
+			@media (max-width: 768px) {
+				flex-shrink: 0;
+				width: 100%;
+				flex-direction: column-reverse;
+				scroll-snap-align: start;
+			}
 
 			.text {
 				background: #fff;
@@ -23,6 +38,10 @@ section.info-cards > article .contenu {
 				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.13);
 				border-radius: 1em;
 				overflow: hidden;
+				
+				> img {
+					display: block;
+				}
 			}
 		}
 
@@ -34,10 +53,38 @@ section.info-cards > article .contenu {
 			.visual {
 				width: calc(55% - (var(--gap) / 2));
 			}
+			
+			@media (max-width: 768px) {
+				.visual, .text {
+					width: 100%;
+				}
+			}
 		}
 
 		._40_60.reversed {
 			flex-direction: row-reverse;
+			
+			@media (max-width: 768px)  {
+				flex-direction: column-reverse;
+			}
+		}
+	}
+	
+	.dots {
+		@media (max-width: 768px) {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			gap: 1em;
+		}
+	}
+	
+	.dot {
+		@media (max-width: 768px) {
+			width: 10px;
+			height: 10px;
+			background: #b6e6fc;
+			border-radius: 100%;			
 		}
 	}
 }

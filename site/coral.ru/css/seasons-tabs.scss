@@ -3,6 +3,9 @@
 section.seasons-tabs > article .contenu {
 	.description {
 		@include property(margin-top, 28px);
+		@media (max-width: 768px) {
+			@include property(margin-top, 20px);
+		}
 	}
 
 	ul.navigation {
@@ -15,8 +18,18 @@ section.seasons-tabs > article .contenu {
 		position: relative;
 		@include property(border-radius, 57px);
 		background: #fff;
-		box-shadow: 0px 37px 40px 0px rgba(0, 0, 0, 0.05);
+		box-shadow: 0 37px 40px 0 rgba(0, 0, 0, 0.05);
 		padding: 2px;
+		
+		@media (max-width: 768px) {
+			width: 100%;
+			margin-top: .5em;
+			background: transparent;
+			box-shadow: unset;
+			overflow-x: scroll;
+			scroll-snap-type: x mandatory;
+			padding: 0 0 8px 0;
+		}
 
 		li {
 			flex: 1;
@@ -27,6 +40,10 @@ section.seasons-tabs > article .contenu {
 			@include property(border-radius, 30px);
 			cursor: pointer;
 			transition: all 300ms ease;
+	
+			@media (max-width: 768px) {
+				scroll-snap-align: center;
+			}
 		}
 
 		li.js-active {
@@ -49,6 +66,10 @@ section.seasons-tabs > article .contenu {
 
 		> img {
 			display: block;
+			
+			@media (max-width: 768px)  {
+				min-height: 420px;
+			}
 		}
 	}
 
@@ -63,6 +84,11 @@ section.seasons-tabs > article .contenu {
 		@include property(margin-top, 40px);
 		display: flex;
 		justify-content: space-evenly;
+		
+		@media (max-width: 768px) {
+			flex-direction: column;
+			gap: 1em;
+		}
 
 		.header {
 			display: flex;
@@ -77,6 +103,7 @@ section.seasons-tabs > article .contenu {
 			@include property(border-radius, 20px);
 			box-shadow: 0 4px 8px var(--shadow-color);
 			text-align: center;
+			user-select: none;
 		}
 
 		.month {
@@ -96,14 +123,20 @@ section.seasons-tabs > article .contenu {
 			font-weight: bold;
 			@include property(margin-bottom, 16px);
 		}
-		.days div {
+		.days .day, .days > div {
 			padding: 5px 10px;
 		}
-		.days div.curved-right {
+		.days .disable {
+			opacity: .2;
+		}
+		.days .holiday {
+			cursor:pointer;
+		}
+		.days .day.curved-right {
 			border-top-right-radius: 12px;
 			border-bottom-right-radius: 12px;
 		}
-		.days div.curved-left {
+		.days .day.curved-left {
 			border-top-left-radius: 12px;
 			border-bottom-left-radius: 12px;
 		}
@@ -125,6 +158,7 @@ section.seasons-tabs > article .contenu {
 		background: var(--colorBgElevated, #fff);
 		font-size: 14px;
 		text-align: center;
+		box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
 
 		.tippy-content {
 			padding: 0;
@@ -151,12 +185,15 @@ section.seasons-tabs > article .contenu {
 			font-weight: 400;
 		}
 
-		.actions a {
-			padding: 5px 12px;
+		.actions {
+			a {
+				padding: 5px 12px;
+			}
 		}
 	}
 
 	.tippy-arrow {
 		color: #fff;
+		padding: 0 !important;
 	}
 }

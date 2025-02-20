@@ -1,26 +1,17 @@
 import tippy from 'tippy.js'
 import 'tippy.js/dist/tippy.css'
-import { hostReactAppReady } from '../../common/js/utils'
+import {hostReactAppReady} from '../../common/js/utils'
 
-const holidays = window._calendar_actions
 
 hostReactAppReady().then(() => {
-	const currentMonth = document.querySelector(
-		'.seasons-tabs-wrapper .content.js-active'
-	)
-
 	window._calendar_actions.forEach(action => {
-		const calendar = document.querySelector(
-			`.calendar[data-month="${action.month}"]`
-		)
-
-		action.holydays.forEach(holiday => {
+		action.holidays.forEach(holiday => {
 			const target = document.querySelector(
 				`[data-holyday="${holiday.holiday_name}"]`
 			)
-			console.log(target)
 
 			tippy(target, {
+				trigger: 'click',
 				content: `
 						<div class="content">
 							<span class="name">${holiday.headline}</span>

@@ -48,7 +48,6 @@ section.kv > article .contenu {
 
 				@media (max-width: 768px) {
 					justify-content: start;
-					align-items: center;
 					margin-top: 0;
 				}
 			}
@@ -56,9 +55,6 @@ section.kv > article .contenu {
 			h1,
 			p {
 				color: var(--content-font-color);
-				@media (max-width: 768px) {
-					text-align: center;
-				}
 			}
 
 			h1 {
@@ -74,14 +70,9 @@ section.kv > article .contenu {
 			}
 
 			p.slogan {
-				font-size: 1em;
-			}
-
-			p.erid {
-				font-size: 10px;
-				margin: auto 0 0 auto;
+				@include font(56px);
 				@media (max-width: 768px) {
-					margin: auto 0 0 0;
+					@include font(32px);
 				}
 			}
 		}

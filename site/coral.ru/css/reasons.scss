@@ -4,6 +4,10 @@
 section.reasons > article .contenu {
 	.reasons-wrapper {
 		@include flex-grid(1em, 5, center);
+		
+		@media (max-width: 768px) {
+			@include flex-grid(1em, 1, center);
+		}
 
 		.reason {
 			display: flex;

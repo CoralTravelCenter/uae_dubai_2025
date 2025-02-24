@@ -4,7 +4,7 @@ section.info-cards > article .contenu {
 		flex-direction: column;
 		gap: 2em;
 		position: relative;
-		
+
 		@media (max-width: 768px) {
 			flex-direction: row;
 			overflow-x: scroll;
@@ -16,7 +16,7 @@ section.info-cards > article .contenu {
 			--gap: 1em;
 			display: flex;
 			gap: var(--gap);
-			
+
 			@media (max-width: 768px) {
 				flex-shrink: 0;
 				width: 100%;
@@ -38,7 +38,7 @@ section.info-cards > article .contenu {
 				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.13);
 				border-radius: 1em;
 				overflow: hidden;
-				
+
 				> img {
 					display: block;
 				}
@@ -53,9 +53,10 @@ section.info-cards > article .contenu {
 			.visual {
 				width: calc(55% - (var(--gap) / 2));
 			}
-			
+
 			@media (max-width: 768px) {
-				.visual, .text {
+				.visual,
+				.text {
 					width: 100%;
 				}
 			}
@@ -63,13 +64,13 @@ section.info-cards > article .contenu {
 
 		._40_60.reversed {
 			flex-direction: row-reverse;
-			
-			@media (max-width: 768px)  {
+
+			@media (max-width: 768px) {
 				flex-direction: column-reverse;
 			}
 		}
 	}
-	
+
 	.dots {
 		@media (max-width: 768px) {
 			width: 100%;
@@ -78,13 +79,17 @@ section.info-cards > article .contenu {
 			gap: 1em;
 		}
 	}
-	
+
 	.dot {
 		@media (max-width: 768px) {
 			width: 10px;
 			height: 10px;
 			background: #b6e6fc;
-			border-radius: 100%;			
+			border-radius: 100%;
 		}
+	}
+
+	.dot.js-active {
+		background: #0092d0;
 	}
 }

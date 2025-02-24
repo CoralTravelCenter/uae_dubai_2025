@@ -1,5 +1,5 @@
-@import "global-variables";
-@import "regular-mixins";
+@import 'global-variables';
+@import 'regular-mixins';
 
 *,
 *::after,
@@ -27,6 +27,7 @@ section.hero > article {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		display: block;
 	}
 
 	.vimeo-video-box {

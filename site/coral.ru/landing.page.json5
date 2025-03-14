@@ -2,7 +2,7 @@
 	env: {
 		brand: 'coral-next',
 		cmsWidgetContainer: '<div>{{{ widget_markup }}}</div>',
-		cdnAssetsURL: '//b2ccdn.coral.ru/content/landing-pages/<название корневой папки>',
+		cdnAssetsURL: '//b2ccdn.coral.ru/content/landing-pages/uae_dubai_2025',
 	},
 	contents: [
 		'/site/coral.ru/markup/global.html',
@@ -10,8 +10,7 @@
 		'/site/coral.ru/markup/hero-text.html',
 		'/site/coral.ru/markup/5reasons.html',
 		'/site/coral.ru/markup/seasons-tabs.html',
-		'/site/coral.ru/markup/tabs-mobile.html',
-		'/site/coral.ru/markup/watch.html',
+		'/site/coral.ru/markup/tabs.html',
 		'/site/coral.ru/markup/tesla.html',
 		'/site/coral.ru/markup/contacts.html',
 	],

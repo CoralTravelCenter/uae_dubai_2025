@@ -1,103 +1,108 @@
+import dayjs from 'dayjs'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import tippy from 'tippy.js'
 import 'tippy.js/dist/tippy.css'
-import {hostReactAppReady} from '../../common/js/utils'
-import dayjs from "dayjs";
-
-window._calendar_actions = [
-	{
-		month: 'Июнь',
-		holidays: [
-			{
-				holiday_name: 'Курбан-байрам',
-				period: '6-10',
-				headline: '16 июня <br> Курбан-байрам',
-				description: 'Один из значимых праздников<br> в исламе',
-				action: {
-					title: 'Выбрать тур',
-					data_lookup_destination: 'ОАЭ',
-				},
-			},
-		],
-	},
-]
-
+import { hostReactAppReady } from '../../common/js/utils'
+dayjs.extend(isSameOrAfter)
 
 function getSeason() {
-	const currentMonth = dayjs().month();
-	const seasons = {
-		0: "Зима",
-		1: "Зима",
-		2: "Весна",
-		3: "Весна",
-		4: "Весна",
-		5: "Лето",
-		6: "Лето",
-		7: "Лето",
-		8: "Осень",
-		9: "Осень",
-		10: "Осень",
-		11: "Зима"
-	};
-	return seasons[currentMonth];
-}
+	const date = dayjs()
+	const seasonChangeDays = [
+		{ month: 1, day: 15, season: 'Весна' }, // Весна с 15 февраля
+		{ month: 4, day: 15, season: 'Лето' }, // Лето с 15 мая
+		{ month: 7, day: 15, season: 'Осень' }, // Осень с 15 августа
+		{ month: 10, day: 15, season: 'Зима' }, // Зима с 15 ноября
+	]
 
+	for (let i = seasonChangeDays.length - 1; i >= 0; i--) {
+		let changeDate = date
+			.month(seasonChangeDays[i].month)
+			.date(seasonChangeDays[i].day)
+		if (date.isSameOrAfter(changeDate)) {
+			return seasonChangeDays[i].season
+		}
+	}
+}
 
 function highlightRange(container, startValue, endValue, holidayName) {
 	if (!container) return
 
-	const days = [...container.querySelectorAll('.days div')]
-	let startIndex = days.findIndex(
-		day => day.textContent.trim() === startValue.toString()
-	)
-	let endIndex = days.findIndex(
-		day => day.textContent.trim() === endValue.toString()
-	)
+	const days = Array.from(container.querySelectorAll('.days div')).filter(
+		day => !day.classList.contains('disable')
+	) // Исключаем disable-дни
 
-	if (startIndex !== -1) {
-		days[startIndex].classList.add('curved-left')
+	let startIndex = -1,
+		endIndex = -1
+
+	// Один проход по массиву для поиска индексов
+	days.forEach((day, index) => {
+		const dayText = day.textContent.trim()
+		if (dayText === startValue.toString()) startIndex = index
+		if (endValue !== undefined && dayText === endValue.toString())
+			endIndex = index
+	})
+
+	// Если начальная дата не найдена — выходим
+	if (startIndex === -1) return
+
+	// Если конечная дата не найдена или равна начальной, выделяем один день
+	if (endIndex === -1 || startIndex === endIndex) {
+		days[startIndex].classList.add('curved', 'holiday')
 		days[startIndex].setAttribute('data-holiday', holidayName)
+		days[startIndex].setAttribute(
+			'data-day',
+			days[startIndex].textContent.trim()
+		) // Добавляем число дня
+		return
 	}
 
-	if (endIndex !== -1) {
-		days[endIndex].classList.add('curved-right')
-	}
+	// Выделяем диапазон
+	days[startIndex].classList.add('curved-left')
+	days[startIndex].setAttribute('data-holiday', holidayName)
+	days[startIndex].setAttribute('data-day', days[startIndex].textContent.trim())
 
-	if (startIndex !== -1 && endIndex !== -1 && startIndex < endIndex) {
-		for (let i = startIndex; i <= endIndex; i++) {
-			days[i].classList.add('holiday')
-		}
+	days[endIndex].classList.add('curved-right')
+	days[endIndex].setAttribute('data-day', days[endIndex].textContent.trim())
+
+	for (let i = startIndex; i <= endIndex; i++) {
+		days[i].classList.add('holiday')
 	}
 }
 
 function initializeSeasonsTabs() {
 	const seasonsTabsButtons = document.querySelectorAll('[data-season]')
 	const seasonsTabsContent = document.querySelectorAll('[data-season-content]')
+	const posterImagesContainer = document.querySelector(
+		'.seasons-tabs-wrapper .poster img'
+	)
+	const posterImages = [
+		'//b2ccdn.coral.ru/content/landing-pages/uae_dubai_2025/dubai_summer.webp',
+		'//b2ccdn.coral.ru/content/landing-pages/uae_dubai_2025/dubai_otum.webp',
+		'//b2ccdn.coral.ru/content/landing-pages/uae_dubai_2025/dubai_winter.webp',
+		'//b2ccdn.coral.ru/content/landing-pages/uae_dubai_2025/dubai_spring.webp',
+	]
 
 	function autoSwitchTab() {
 		const currentSeason = getSeason()
 		const targetButton = document.querySelector(
 			`[data-season="${currentSeason}"]`
 		)
-		const targetContent = document.querySelector(
-			`[data-season-content="${currentSeason}"]`
-		)
 
-		if (targetButton && targetContent) {
+		if (targetButton) {
 			seasonsTabsButtons.forEach(button => button.classList.remove('js-active'))
 			seasonsTabsContent.forEach(content =>
 				content.classList.remove('js-active')
 			)
 
-			targetButton.classList.add('js-active')
-			targetContent.classList.add('js-active')
+			targetButton.click()
 		}
 	}
 
-	seasonsTabsButtons.forEach(button => {
+	seasonsTabsButtons.forEach((button, idx) => {
 		button.addEventListener('click', e => {
 			seasonsTabsContent.forEach(season => season.classList.remove('js-active'))
 			seasonsTabsButtons.forEach(btn => btn.classList.remove('js-active'))
-
+			posterImagesContainer.src = posterImages[idx]
 			e.currentTarget.classList.add('js-active')
 			const targetContent = document.querySelector(
 				`[data-season-content="${e.currentTarget.getAttribute('data-season')}"]`
@@ -118,6 +123,8 @@ function applyCalendarHighlights() {
 
 		action.holidays.forEach(holiday => {
 			const [from, to] = holiday.period.split('-').map(Number)
+			console.log(from, to)
+
 			highlightRange(calendar, from, to, holiday.holiday_name)
 		})
 	})
